@@ -1,34 +1,52 @@
-var movieList = [
-  { title:'The Shawshank Redemption', release:'1994', imdbVotes:'1043071'},
-  { title:'The Godfather', release:'1972', imdbVotes:'1732416'},
-  { title:'The Godfather: Part II', release:'1974', imdbVotes:'474640'},
-  { title:'Pulp Fiction', release:'1994', imdbVotes:'806431'},
-  { title:'12 Angry Men', release:'1957', imdbVotes:'255846'  },
-  { title:'Schindler\'s List', release:'1993', imdbVotes:'528900'},
-  { title:'The Lord of the Ringss The Return of the King', release:'2003', imdbVotes:'738931'},
-  { title:'Fight Club', release:'1998', imdbVotes: '791186'},
-  { title:'Star Wars: Episode V - The Empire Strikes Back', release:'1980', imdbVotes:'503348'},
-]
-var moviesSort = [];
-for(var index = 0; index < movieList.length; index++) {
-  var movieList = movieList[info];
-  var info = {
-    title : movieList.title,
-    release : movieList.release,
-    imdbVotes : movieList.imdbVotes
+document.write('<h4>Movie Sort</h4>');
+
+var movies = [
+    'The Shawshank Redemption,1994,1043071',
+    'The Godfather,1972,732416',
+    'The Godfather: Part II,1974,474640',
+    'Pulp Fiction,1994,806431',
+    'The Dark Knight,2008,1017508',
+    '12 Angry Men,1957,255846',
+    'Schindler\'s List,1993,528900',
+    'The Lord of the Rings: The Return of the King,2003,738931',
+    'Fight Club,1999,791186',
+    'Star Wars: Episode V - The Empire Strikes Back,1980,503348'
+];
+
+/*
+ * Takes a formatted list of movies, parses the data, and
+ * returns the movies sorted by year released
+ */
+var movieSort = function(movies) {
+  var results = [];
+  for(var index = 0; index < movies.length; index++) {
+    var items = movies[index].split(',');
+    var movie = {
+      title: items[0],
+      year: parseInt(items[1]),
+      votes: parseInt(items[2])
+    };
+    results.push(movie);
   }
-var count = 0;
-var moviesSort = function(lhs, rhs) {
-  console.log(count++ + ': ' + lhs.release + ' - ' + rhs.release);
-  if(lhs.imdbVote < rhs.imdbVote) {
-    return -1;
+  var sortMovies = function(lhs, rhs) {
+    if(lhs.year < rhs.year) {
+      return -1;
+    }
+    else if(lhs.year > rhs.year) {
+      return 1;
+    }
+    else if(lhs.votes < rhs.votes) {
+      return -1;
+    }
+    else if(lhs.votes > rhs.votes) {
+      return 1;
+    }
+    else {
+      return 0;
+    }
   }
-  else if(rhs.imdbVote < lhs.imdbVote) {
-    return 1;
-  }
-  else {
-    return 0;
-  }
+  return results.sort(sortMovies);
 }
-}
-return(JSON.stringify(moviesSort(title, release, imdbVote)));
+
+document.write('<pre>' + 
+  JSON.stringify(movieSort(movies), null, '  ') + '</pre>');
