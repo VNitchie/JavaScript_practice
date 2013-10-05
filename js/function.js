@@ -24,7 +24,6 @@ $(document).ready(function() {
     return false;
   });
 })
-  
 
 /*
  * Takes an input array of text items and returns a list of the
@@ -63,9 +62,6 @@ $(document).ready(function() {
     $('.filter-results').text(JSON.stringify(results));
   });
 });
-        
-//document.write('<p>7 -> ' + filterWordLength(testWords, 7) + '</p>');
-//document.write('<p>1000 -> ' + filterWordLength(testWords, 100) + '</p>');
 
 //document.write('<h4>Date Greeting</h4>');
 
